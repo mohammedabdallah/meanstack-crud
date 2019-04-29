@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 
 @Component({
   selector: 'app-listposts',
@@ -6,8 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./listposts.component.css']
 })
 export class ListpostsComponent implements OnInit {
-  posts = [
-  ];
+  @Input() posts =[];
   constructor() { }
 
   ngOnInit() {
