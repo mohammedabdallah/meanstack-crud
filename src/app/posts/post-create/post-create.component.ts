@@ -11,9 +11,11 @@ export class CreatePostComponent {
 	enteredTitle = '';
 	enteredContent = '';
 	@Output() postCreated = new EventEmitter;
-	onAddPost()
+	onAddPost(form)
 	{
-		const post: Post ={title:this.enteredTitle,content:this.enteredContent};
+		if(form.invalid)
+			return;
+		const post: Post ={title:form.value.title,content:form.value.content};
 		this.postCreated.emit(post);
 	}
 }
