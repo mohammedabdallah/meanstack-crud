@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { CreatePostComponent } from './posts/post-create/post-create.component';
 import { HeaderComponent } from './header/header.component';
 import { ListpostsComponent } from './posts/listposts/listposts.component';
-
 @NgModule({
   declarations: [
     AppComponent,
