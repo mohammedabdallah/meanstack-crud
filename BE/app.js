@@ -19,7 +19,14 @@ app.use((req, res, next) => {
   );
   next();
 });
-app.use("/api/posts",(req,res,next)=>{
+app.post("/api/posts",(req,res,next)=>{
+	const post = req.body;
+	res.status(201).json({
+		message : "Post Created Succfully",
+		post    : post
+	});
+});
+app.get("/api/posts",(req,res,next)=>{
 	const posts = [
 		{id:"sdfsd22",title:"post ttiel",content:"postcontent"},
 		{id:"sdfsd234",title:"post ttiel",content:"postcontent"},
