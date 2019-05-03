@@ -22,7 +22,7 @@ export class PostsService{
 	Addpost(title,content)
 	{
 		const post: Post = {title:title,content:content};
-		this.http.post<{message:string}>("http://localhost:3000/api/posts",'post')
+		this.http.post<{message:string}>("http://localhost:3000/api/posts",post)
 		.subscribe((response)=>{
 			console.log(response.message);
 			this.posts.push(post);

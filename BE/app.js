@@ -1,9 +1,18 @@
 const express = require("express");
+const mongoose= require('mongoose');
 const bodyParser = require("body-parser");
-
+const Post     = require('./models/post');
 
 const app = express();
 
+
+mongoose.connect('mongodb+srv://admin:UVX9kuULDQfRVnl9@cluster0-u46gh.mongodb.net/test?retryWrites=true',{useNewUrlParser:true})
+.then(()=>{
+	console.log("Contected");	
+}).catch(()=>{
+	console.log("error");
+})
+;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -20,22 +29,25 @@ app.use((req, res, next) => {
   next();
 });
 app.post("/api/posts",(req,res,next)=>{
-	const post = req.body;
+	const postData = req.body;
+	const post = new Post({
+		title : req.body.title,
+		content: req.body.content
+	});
+	post.save();
 	res.status(201).json({
 		message : "Post Created Succfully",
 		post    : post
 	});
 });
 app.get("/api/posts",(req,res,next)=>{
-	const posts = [
-		{id:"sdfsd22",title:"post ttiel",content:"postcontent"},
-		{id:"sdfsd234",title:"post ttiel",content:"postcontent"},
-		{id:"234lsdf",title:"post ttiel",content:"postcontent"},
-	];
-	res.status(200).json({
-		message : "Posts get method",
-		posts   : posts
+	Post.find().then(documents=>{
+		res.status(200).json({
+			message : "Posts get method",
+			posts   : documents
+		});
 	});
+	
 });
 
 
